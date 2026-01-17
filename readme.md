@@ -11,7 +11,7 @@ EclairVM is a **stack-based** virtual machine for [eclairscript](https://github.
 
 # Usage
 > [!NOTE]
-> This is **not** implemented yet! Like I said this project is in very early development stage.
+> This is **not** implemented yet! Like I said this project is in a very early development stage.
 
 `evm file.eclair`
 The `.eclair` file is a compressed archive containing all the bytecode needed to run the program.  
