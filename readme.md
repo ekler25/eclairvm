@@ -1,22 +1,26 @@
 # EclairVM
 
-EclairVM is a **stack-based** virtual machine for [eclairscript](https://github.com/ekler25/eclairscript).
+EclairVM is a **stack-based** virtual machine for [Eclairscript](https://github.com/ekler25/eclairscript).
 
-> [!IMPORTANT] 
+> [!IMPORTANT]  
 > This project is currently in a **very early** development stage.  
 > Not all VM features are implemented yet, and APIs may change frequently.
 
 # Current Features
-- None 💔💔
+- Bytecode decoding
+- Nothing more 💔💔
 
 # Usage
-> [!NOTE]
-> This is **not** implemented yet! Like I said this project is in a very early development stage.
+> [!NOTE]  
+> This is **not fully implemented yet**! As mentioned above, this project is still in a very early development stage.
 
-`evm file.eclair`
-The `.eclair` file is a compressed archive containing all the bytecode needed to run the program.  
-Dynamic linking will be added later 🌹.
+`evm file.ebyte`
 
+The `.ebyte` file is currently just a plain text file containing bytecode.
+
+Later on, the `.eclair` file extension will be introduced.  
+A `.eclair` file will be a compressed archive containing all the bytecode required to run the program.  
+Dynamic linking will also be added later 🌹.
 
 # Eclairscript
 
