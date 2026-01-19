@@ -4,7 +4,7 @@
 
 enum class OpCodes {
     JMP, IPUSH, CALL, INVH,
-    RET, EOP, IPOP, IADD, ISUB, IMUL, IDIV,
+    RET, IPOP, IADD, ISUB, IMUL, IDIV,
     PUSHSTR
 };
 
@@ -32,3 +32,14 @@ struct Instruction {
     Instruction(OpCodes OpCode, const Vec<Byte>& Operands = {})
         : OpCode(OpCode), Operands(Operands) {}
 };
+
+void JMP(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void IPUSH(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void CALL(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void RET(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void EOP(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void IPOP(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void IADD(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void ISUB(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void IMUL(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
+void IDIV(int& Index, Vec<Byte>& Operands, const Vec<Instruction>& Inst);
