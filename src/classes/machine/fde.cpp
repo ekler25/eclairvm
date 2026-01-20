@@ -12,23 +12,22 @@ Vec<Instruction> Machine::Decode(Vec<Byte>& Bytecode) {
         OpCodes OpCode = (OpCodes)Bytecode[ByteIndex];
 
         auto OpInfoIt = OpCodeTable.find(OpCode);
-        if (OpInfoIt == OpCodeTable.end()) {
-            throw std::runtime_error("[ \x1b[91mDecoding Error\x1b[0m ] invalid opcode at index " + std::to_string(ByteIndex));
-        }
+        if (OpInfoIt == OpCodeTable.end())
+            throw RuntimeError("[ \x1b[91mDecoding Error\x1b[0m ] invalid opcode at index " + std::to_string(ByteIndex));
+
 
         int OperandSpec = OpInfoIt->second;
         Vec<Byte> Operands;
 
         if (OperandSpec == -1) {
-            if (ByteIndex + 1 >= BytecodeSize) {
-                throw std::runtime_error("[ \x1b[91mDecoding Error\x1b[0m ] missing operand length byte!");
-            }
+            if (ByteIndex + 1 >= BytecodeSize)
+                throw RuntimeError("[ \x1b[91mDecoding Error\x1b[0m ] missing operand length byte!\n");
+
 
             Byte OperandLength = Bytecode[ByteIndex + 1];
 
-            if (ByteIndex + 2 + OperandLength > BytecodeSize) {
-                throw std::runtime_error("[ \x1b[91mDecoding Error\x1b[0m ] truncated variable length operands!");
-            }
+            if (ByteIndex + 2 + OperandLength > BytecodeSize)
+                throw RuntimeError("[ \x1b[91mDecoding Error\x1b[0m ] truncated variable length operands!\n");
 
             Operands.insert(
                 Operands.end(),
@@ -42,9 +41,8 @@ Vec<Instruction> Machine::Decode(Vec<Byte>& Bytecode) {
         else {
             int OperandCount = (int)OperandSpec;
 
-            if (ByteIndex + 1 + OperandCount > BytecodeSize) {
-                throw std::runtime_error("[ \x1b[91mDecoding Error\x1b[0m ] truncated fixed length operands!");
-            }
+            if (ByteIndex + 1 + OperandCount > BytecodeSize)
+                throw RuntimeError("[ \x1b[91mDecoding Error\x1b[0m ] truncated fixed length operands!\n");
 
             if (OperandCount > 0) {
                 Operands.insert(
@@ -64,17 +62,25 @@ Vec<Instruction> Machine::Decode(Vec<Byte>& Bytecode) {
 }
 
 void Machine::Execute(Vec<Instruction> Inst) {
-    for (int i = 0; i < Inst.size(); i++) {
-        switch (Inst[i].OpCode) {
-            case OpCodes::JMP:   JMP(i, Inst[i].Operands, Inst); break;
-            case OpCodes::IPUSH: IPUSH(i, Inst[i].Operands, Inst); break;
-            case OpCodes::CALL:  CALL(i, Inst[i].Operands, Inst); break;
-            case OpCodes::RET:   RET(i, Inst[i].Operands, Inst); break;
-            case OpCodes::IADD:  IADD(i, Inst[i].Operands, Inst); break;
-            case OpCodes::ISUB:  ISUB(i, Inst[i].Operands, Inst); break;
-            case OpCodes::IMUL:  IMUL(i, Inst[i].Operands, Inst); break;
-            case OpCodes::IDIV:  IDIV(i, Inst[i].Operands, Inst); break;
-            default: break;
+    IP = 0;
+    while (IP < Inst.size()) {
+        auto& CurrentInstruction = Inst[IP];
+        int RIP = IP;
+
+        switch (CurrentInstruction.OpCode) {
+            case OpCodes::JMP:   JMP(CurrentInstruction.Operands); break;
+            case OpCodes::IPUSH: IPUSH(CurrentInstruction.Operands); break;
+            case OpCodes::INVH:  INVH(CurrentInstruction.Operands); break;
+            case OpCodes::CPUSH: CPUSH(CurrentInstruction.Operands); break;
+            case OpCodes::CALL:  CALL(CurrentInstruction.Operands); break;
+            case OpCodes::RET:   RET(CurrentInstruction.Operands); break;
+            case OpCodes::IADD:  IADD(CurrentInstruction.Operands); break;
+            case OpCodes::ISUB:  ISUB(CurrentInstruction.Operands); break;
+            case OpCodes::IMUL:  IMUL(CurrentInstruction.Operands); break;
+            case OpCodes::IDIV:  IDIV(CurrentInstruction.Operands); break;
+            default: IP++; break;
         }
+
+        if (IP == RIP) IP++;
     }
 }
