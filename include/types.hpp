@@ -14,6 +14,7 @@ using Word  = uint16_t;
 using Dword = uint32_t;
 using Qword = uint64_t;
 
+using RuntimeError = std::runtime_error;
 using String = std::string;
 template <typename T>
 using Vec = std::vector<T>;
