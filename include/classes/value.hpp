@@ -4,7 +4,7 @@
 #include <types.hpp>
 
 enum class ValueType {
-    Int, Float, Bool
+    Int, Float, Bool, Char
 };
 
 struct Value {
@@ -13,11 +13,26 @@ struct Value {
         int i;
         float f;
         bool b;
+        char c;
     };
 
-    Value(int Val) : Type(ValueType::Int), i(Val) {}
-    Value(float Val) : Type(ValueType::Float), f(Val) {}
-    Value(bool Val) : Type(ValueType::Bool), b(Val) {}
+    void InitInt(int Val) {
+        Type = ValueType::Int;
+        i = Val;
+    }
 
-    Value() : Type(ValueType::Int), i(0) {}
+    void InitFloat(float Val) {
+        Type = ValueType::Float;
+        f = Val;
+    }
+
+    void InitBool(bool Val) {
+        Type = ValueType::Bool;
+        b = Val;
+    }
+
+    void InitChar(char Val) {
+        Type = ValueType::Char;
+        c = Val;
+    }
 };
