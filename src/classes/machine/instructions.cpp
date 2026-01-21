@@ -51,7 +51,19 @@ void Machine::IPOP(Vec<Byte>& Operands) {
 }
 
 void Machine::IADD(Vec<Byte>& Operands) {
+    if (OperandStack.size() < 2) return;
+    Value Lhs = OperandStack.back();
+    OperandStack.pop_back();
 
+    Value Rhs = OperandStack.back();
+    OperandStack.pop_back();
+
+    if (!(Rhs.Type == ValueType::Int && Lhs.Type == ValueType::Int)) return;
+
+    Value Val;
+    Val.InitInt(Lhs.i + Rhs.i);
+
+    OperandStack.push_back(Val);
 }
 
 void Machine::ISUB(Vec<Byte>& Operands) {
