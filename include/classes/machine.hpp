@@ -28,4 +28,5 @@ struct Machine {
     void IDIV(Vec<Byte>& Operands);
     void IPUSH(Vec<Byte>& Operands);
     void CPUSH(Vec<Byte>& Operands);
+    void SPUSH(Vec<Byte>& Operands);
 };
