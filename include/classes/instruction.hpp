@@ -5,7 +5,7 @@
 enum class OpCodes {
     JMP, CALL, INVH,
     RET, EOP, IPOP, IADD, ISUB, IMUL, IDIV,
-    PUSHSTR, IPUSH, CPUSH
+    SPUSH, IPUSH, CPUSH
 };
 
 const Map<OpCodes, int> OpCodeTable = {
@@ -23,7 +23,7 @@ const Map<OpCodes, int> OpCodeTable = {
     {OpCodes::INVH,  1},
     
     {OpCodes::IPUSH, -1},
-    {OpCodes::PUSHSTR, -1}
+    {OpCodes::SPUSH, -1}
 };
 
 struct Instruction {
