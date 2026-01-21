@@ -4,17 +4,16 @@
 #include <types.hpp>
 
 enum class ValueType {
-    Int, Float, Bool, Char
+    Int, Float, Bool, Char, Str
 };
 
 struct Value {
     ValueType Type;
-    union {
-        int i;
-        float f;
-        bool b;
-        char c;
-    };
+    int i;
+    float f;
+    bool b;
+    char c;
+    String s;
 
     void InitInt(int Val) {
         Type = ValueType::Int;
@@ -34,5 +33,10 @@ struct Value {
     void InitChar(char Val) {
         Type = ValueType::Char;
         c = Val;
+    }
+
+    void InitStr(String Val) {
+        Type = ValueType::Str;
+        s = Val;
     }
 };
