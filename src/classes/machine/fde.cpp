@@ -78,6 +78,7 @@ void Machine::Execute(Vec<Instruction> Inst) {
             case OpCodes::ISUB:  ISUB(CurrentInstruction.Operands); break;
             case OpCodes::IMUL:  IMUL(CurrentInstruction.Operands); break;
             case OpCodes::IDIV:  IDIV(CurrentInstruction.Operands); break;
+            case OpCodes::SPUSH: SPUSH(CurrentInstruction.Operands); break;
             default: IP++; break;
         }
 
