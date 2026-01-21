@@ -33,6 +33,8 @@ void Machine::INVH(Vec<Byte>& Operands) {
             if (OperandStack.size() > 0) {
                 Value Output = OperandStack.back();
                 if (Output.Type == ValueType::Char) std::cout << Output.c;
+                if (Output.Type == ValueType::Str) std::cout << Output.s;
+                if (Output.Type == ValueType::Int) std::cout << Output.i;
                 OperandStack.pop_back();
             }
             break;
@@ -70,6 +72,20 @@ void Machine::CPUSH(Vec<Byte>& Operands) {
 
     Value Val;
     Val.InitChar((char)Operands[0]);
+
+    OperandStack.push_back(Val);
+}
+
+void Machine::SPUSH(Vec<Byte>& Operands) {
+    if (Operands.empty())
+        throw RuntimeError("[\x1b[91mRuntime Error\x1b[0m] Failed to execute cpush : no value provided!\n");
+
+    Value Val;
+    String Str;
+    for (int i = 0; i < Operands.size(); i++) {
+        Str += Operands[i];
+    }
+    Val.InitStr(Str);
 
     OperandStack.push_back(Val);
 }
