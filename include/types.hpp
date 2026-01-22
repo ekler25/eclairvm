@@ -14,6 +14,11 @@ using Word  = uint16_t;
 using Dword = uint32_t;
 using Qword = uint64_t;
 
+using int8  = int8_t;
+using int16  = int16_t;
+using int32  = int32_t;
+using int64  = int64_t;
+
 using RuntimeError = std::runtime_error;
 using String = std::string;
 template <typename T>
