@@ -29,6 +29,15 @@ Later on, the `.eclair` file extension will be introduced.
 A `.eclair` file will be a compressed archive containing all the bytecode required to run the program.  
 Dynamic linking will also be added later 🌹.
 
+# Example
+
+`0B 02 01 E7 0B 02 01 E7 06 02 01`
+This is a **hexodecimal representation** of an `.ebyte` file.
+`0B 02 01 E7` : IPUSH 2 01E7  | push int32 value 0x000001E7 onto the operand stack
+`0B 02 01 E7` : IPUSH 2 01E7  | push int32 value 0x000001E7 onto the operand stack
+`06`          : IADD          | pop the last 2 values from operand stack and push their sum
+`02 01`       : INVH 1        | invoke native host method with index `1` (stdout)
+
 # Eclairscript
 
 Eclairscript has its own [repository](https://github.com/ekler25/eclairscript).
