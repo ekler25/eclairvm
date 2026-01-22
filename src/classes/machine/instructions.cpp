@@ -34,7 +34,7 @@ void Machine::INVH(Vec<Byte>& Operands) {
                 Value Output = OperandStack.back();
                 if (Output.Type == ValueType::Char) std::cout << Output.c;
                 if (Output.Type == ValueType::Str) std::cout << Output.s;
-                if (Output.Type == ValueType::Int) std::cout << Output.i;
+                if (Output.Type == ValueType::Int32) std::cout << Output.i;
                 OperandStack.pop_back();
             }
             break;
@@ -58,7 +58,7 @@ void Machine::IADD(Vec<Byte>& Operands) {
     Value Rhs = OperandStack.back();
     OperandStack.pop_back();
 
-    if (!(Rhs.Type == ValueType::Int && Lhs.Type == ValueType::Int)) return;
+    if (!(Rhs.Type == ValueType::Int32 && Lhs.Type == ValueType::Int32)) return;
 
     Value Val;
     Val.InitInt(Lhs.i + Rhs.i);
@@ -67,15 +67,51 @@ void Machine::IADD(Vec<Byte>& Operands) {
 }
 
 void Machine::ISUB(Vec<Byte>& Operands) {
+    if (OperandStack.size() < 2) return;
+    Value Lhs = OperandStack.back();
+    OperandStack.pop_back();
 
+    Value Rhs = OperandStack.back();
+    OperandStack.pop_back();
+
+    if (!(Rhs.Type == ValueType::Int32 && Lhs.Type == ValueType::Int32)) return;
+
+    Value Val;
+    Val.InitInt(Lhs.i - Rhs.i);
+
+    OperandStack.push_back(Val);
 }
 
 void Machine::IMUL(Vec<Byte>& Operands) {
+    if (OperandStack.size() < 2) return;
+    Value Lhs = OperandStack.back();
+    OperandStack.pop_back();
 
+    Value Rhs = OperandStack.back();
+    OperandStack.pop_back();
+
+    if (!(Rhs.Type == ValueType::Int32 && Lhs.Type == ValueType::Int32)) return;
+
+    Value Val;
+    Val.InitInt(Lhs.i * Rhs.i);
+
+    OperandStack.push_back(Val);
 }
 
 void Machine::IDIV(Vec<Byte>& Operands) {
+    if (OperandStack.size() < 2) return;
+    Value Lhs = OperandStack.back();
+    OperandStack.pop_back();
 
+    Value Rhs = OperandStack.back();
+    OperandStack.pop_back();
+
+    if (!(Rhs.Type == ValueType::Int32 && Lhs.Type == ValueType::Int32)) return;
+
+    Value Val;
+    Val.InitInt(Lhs.i / Rhs.i);
+
+    OperandStack.push_back(Val);
 }
 
 void Machine::CPUSH(Vec<Byte>& Operands) {
