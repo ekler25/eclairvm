@@ -31,12 +31,12 @@ Dynamic linking will also be added later 🌹.
 
 # Example
 
-`0B 02 01 E7 0B 02 01 E7 06 02 01`<br>
-This is a **hexodecimal representation** of an `.ebyte` file.<br>
-`0B 02 01 E7` : IPUSH 2 01E7  | push int32 value 0x000001E7 onto the operand stack<br>
-`0B 02 01 E7` : IPUSH 2 01E7  | push int32 value 0x000001E7 onto the operand stack<br>
-`06`          : IADD          | pop the last 2 values from operand stack and push their sum<br>
-`02 01`       : INVH 1        | invoke native host method with index `1` (stdout)<br>
+| Hex        | Instruction | Description |
+|------------|------------|------------|
+| 0B 02 01 E7 | IPUSH 2 01E7 | push int32 value 0x000001E7 onto the operand stack |
+| 0B 02 01 E7 | IPUSH 2 01E7 | push int32 value 0x000001E7 onto the operand stack |
+| 06          | IADD         | pop the last 2 values from operand stack and push their sum |
+| 02 01       | INVH 1       | invoke native host method with index `1` (stdout) |
 
 # Eclairscript
 
