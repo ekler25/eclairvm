@@ -10,11 +10,11 @@ EclairVM is a **stack-based** virtual machine for [Eclairscript](https://github.
 - Bytecode decoding
 - Executing basic operand stack operations like: ipush, iadd, isub, cpush, spush etc.
 - Outputing characters, strings and numbers
-- jumping to other addresses
+- Jumping to other addresses
+- Calling and returning (call stack)
 
 # todo
-- call stack
-- more native methods i.e. stdin for reading characters from the user
+- More native methods i.e. stdin for reading characters from the user.
 - idk
 
 # Usage
@@ -30,6 +30,9 @@ A `.eclair` file will be a compressed archive containing all the bytecode requir
 Dynamic linking will also be added later 🌹.
 
 # Example
+
+> [!IMPORTANT]  
+> This example doesn't work anymore, I've changed a lot of stuff and I'm too lazy to come up with a new one.
 
 | Hex        | Instruction | Description |
 |------------|------------|------------|
