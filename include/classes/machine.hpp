@@ -6,12 +6,17 @@
 #include <types.hpp>
 
 struct Machine {
-    Vec<Value> Variables;
-    Vec<StackFrame> CallStack;
-    Vec<Value> OperandStack;
-    Vec<UPtr<String>> StringHeap;
+    Vec<Value>    GlobalVariableTable;
+    Vec<Function> GlobalFunctionTable;
+    
+    Vec<CallStackFrame> CallStack;
+    Vec<Value>          OperandStack;
+    Vec<UPtr<String>>   StringHeap;
 
-    int IP = 0;
+    int64 IP = 0;
+    int16 FunctionCount = 0x0000;
+    int8  Flags = 0x00;
+    int8  Version = 0x00;
     
     Vec<Instruction> Decode(Vec<Byte>& Bytecode);
     void Execute(Vec<Instruction> Inst);
@@ -29,4 +34,8 @@ struct Machine {
     void IPUSH(Vec<Byte>& Operands);
     void CPUSH(Vec<Byte>& Operands);
     void SPUSH(Vec<Byte>& Operands);
+    void STOREG(Vec<Byte>& Operands);
+    void STOREL(Vec<Byte>& Operands);
+    void LOADG(Vec<Byte>& Operands);
+    void LOADL(Vec<Byte>& Operands);
 };
