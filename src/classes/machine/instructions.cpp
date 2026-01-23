@@ -5,7 +5,7 @@
 #include <utils.hpp>
 
 void Machine::JMP(Vec<Byte>& Operands) {
-    IP += Operands[0];
+    IP = Operands[0];
 }
 
 void Machine::IPUSH(Vec<Byte>& Operands) {
@@ -137,3 +137,4 @@ void Machine::SPUSH(Vec<Byte>& Operands) {
 
     OperandStack.push_back(Val);
 }
+
